@@ -1,16 +1,15 @@
 
 
-console.log("loaded")
+    
 document.addEventListener("click",(e)=>{
-    console.log("clicked")
-    function send(pass){
+        
+    function send(tabs){
         removeoldanswer()
-
+        let pass=document.getElementById("password").value
         console.log(pass)
-        const answer=document.createElement("p")
-        answer.innerText="strong"
-        answer.className="answer"
-        document.body.appendChild(answer)
+        console.log(tabs[0])
+        browser.tabs.sendMessage(tabs[0].id,{ action: "fetch",passw:pass })
+            
     }
 
     function removeoldanswer(){
@@ -22,10 +21,24 @@ document.addEventListener("click",(e)=>{
     }
 
     if (e.target.id==="BUTTON"){
-        send(document.getElementById("password").value)
+        browser.tabs.query({active:true,currentWindow:true}).then(send)
     }else{
         console.log("returned")
         return
     }
 })
 
+browser.runtime.onMessage.addListener((message)=>{
+    if (message.action === 'dataReceived'){
+        const answer=document.createElement("p")
+        answer.className="answer"
+        answer.innerHTML=message.data.level
+        document.body.appendChild(answer)
+    }
+})
+
+
+browser.tabs.executeScript({ file: "/content-scripts/eval.js" }).then(()=>{
+    console.log("injected")
+})
+  

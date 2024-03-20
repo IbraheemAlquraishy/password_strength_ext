@@ -6,7 +6,7 @@
     "icons":{
         "48":"icons/beasts-48.png"
     },
-    
+    "permissions":["<all_urls>","activeTab"],
     "browser_action":{
         "default_icon":"icons/beasts-32.png",
         "default_title":"password strength",
