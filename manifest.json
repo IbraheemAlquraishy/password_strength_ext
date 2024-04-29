@@ -3,12 +3,9 @@
     "name":"password strength",
     "version":"0.1",
     "description":"an addon to make request for password strength model using http request",
-    "icons":{
-        "48":"icons/beasts-48.png"
-    },
     "permissions":["<all_urls>","activeTab"],
     "browser_action":{
-        "default_icon":"icons/beasts-32.png",
+        
         "default_title":"password strength",
         "default_popup":"popup/password_strength.html"
     }

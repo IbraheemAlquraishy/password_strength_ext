@@ -5,7 +5,7 @@
   window.hasRun = true;
 
   
-  browser.runtime.onMessage.addListener((message)=>{
+  chrome.runtime.onMessage.addListener((message)=>{
     
       if (message.action ==="fetch"){
         
@@ -17,7 +17,7 @@
         .then((response) => {
           console.log(response.body)
           response.json().then((data) => {
-          browser.runtime.sendMessage({ action: 'dataReceived', data: data })
+          chrome.runtime.sendMessage({ action: 'dataReceived', data: data })
         })}
         )
         .catch(error => {
